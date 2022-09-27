@@ -1,0 +1,178 @@
+# calculator
+
+<!DOCTYPE html>
+<html>
+    <style>
+        .main_table{
+            border:1px solid gray;
+            background-color:#D8D8D8;
+            border-radius:5px;
+        }
+        .num_len{
+            width:60px;
+            height:50px;
+            background-color:#EAEAEA;
+            border:1px solid gray;
+            border-radius:5px;
+            font-size:20px;
+            /* background-color:white; */
+        }
+        .equ_button{
+            height:100px;
+            width:60px;
+            border:1px solid gray;
+            border-radius:5px;
+            font-size:20px;
+            background-color:white;
+        }
+        .input_style{
+            width:310px;
+            height:50px;
+            border:1px solid gray;
+            border-radius:5px;
+            background-color:#F2F2F2;
+            font-size:30px;
+        }
+        .num_possition{
+            /* position:absolute;
+            top:1000px;
+            left:1000px; */
+            height:50px;
+            /* width:310px; */
+            margin-left:100px;
+            margin-top:100px;
+        }
+
+    </style>
+    <script>
+        const fun_div=()=>{
+            let y = checking()
+            document.getElementById("demo").value += "/"
+        }
+
+        const fun_mul=()=>{
+            let y = checking()
+            let st = document.getElementById("demo").value += "*" 
+        }
+
+        const fun_sub=()=>{
+            let y = checking()
+            let st = document.getElementById("demo").value += "-"
+        }
+
+        const fun_dot=()=>{
+            let x = document.getElementById("demo").value+=".";
+            document.getElementById("demo").value=x;
+        }
+
+        const fun_per=()=>{
+            let x = document.getElementById("demo").value+="%";
+            document.getElementById("demo").value=x;
+        }
+
+        const fun_plus=()=>{
+            let y = checking()
+            let st = document.getElementById("demo").value += "+"
+        }
+
+        const fun_root=()=>{
+            let root = document.getElementById("demo").value;
+            root = parseInt(root)
+            let totle = Math.sqrt(root);    
+            document.getElementById("demo").value=totle;
+        }
+
+        const display=(value)=>{
+            let x = document.getElementById("demo").value+= value;
+            document.getElementById("demo").value=x;
+        } 
+
+        const clearscreen=()=>{
+            let x = document.getElementById("demo").value="";
+            document.getElementById("demo").innerHTML = x;
+            
+        }
+        
+        const checking=()=>{
+            let oper = document.getElementById("demo").value;
+                for(let n=0;n<oper.length;n++){
+                    if(oper[oper.length-1] == "%"){
+                        let sub_st = oper.substring(0,oper.length)
+                        let sp = sub_st.split("*")
+                        let num = parseFloat(sp[0])
+                        let per_cent = parseFloat(sp[1])
+                        total = (per_cent/100)*num
+                        document.getElementById("demo").value = total    
+                    }
+                    else if(oper[n] == "+"){
+                        let sp = oper.split("+")
+                        let x = parseFloat(sp[0])
+                        let y = parseFloat(sp[1])
+                        let total = x + y
+                        document.getElementById("demo").value = total
+                    }
+                    else if(oper[n] == "-"){
+                        let sp = oper.split("-")
+                        let x = parseFloat(sp[0])
+                        let y = parseFloat(sp[1])
+                        let total = x - y
+                        document.getElementById("demo").value = total
+                    }
+                    else if(oper[n] == "*"){
+                        let sp = oper.split("*")
+                        let x = parseFloat(sp[0])
+                        let y = parseFloat(sp[1])
+                        let total = x * y
+                        total = total.toString()
+                        document.getElementById("demo").value = total
+                    }
+                    else if(oper[n] == "/"){
+                        let sp = oper.split("/")
+                        let x = parseFloat(sp[0])
+                        let y = parseFloat(sp[1])
+                        let total = x / y
+                        document.getElementById("demo").value = total
+                    }
+                }
+        }
+    </script>
+    <body>
+        <div >
+            <table class="main_table">
+                <tr><th colspan="5" ><input class="input_style" id="demo"></input></th></tr>
+
+                <tr >
+                    <td><button onclick="display(7)" class="num_len" id="id_7" >7</button></td>
+                    <td><button onclick="display(8)" class="num_len" id="id_8">8</button></td>
+                    <td><button onclick="display(9)" class="num_len" id="id_9">9</button></td>
+                    <td><button onclick="fun_div()" class="num_len" id="id_div">/</button></td>
+                    <td><button onclick="clearscreen()" class="num_len" id="demo1">C</button></td>
+                </tr><br>
+
+                <tr>
+                    <td><button onclick="display(4)"  class="num_len" id="id_4">4</button></td>
+                    <td><button onclick="display(5)"  class="num_len" id="id_5">5</button></td>
+                    <td><button onclick="display(6)"  class="num_len" id="id_6">6</button></td>
+                    <td><button onclick="fun_mul()" class="num_len" id="id_mul">*</button></td>
+                    <td><button onclick="fun_root()" class="num_len" id="id_squ">&#8730</button></td>
+                </tr><br>
+
+                <tr>
+                    <td><button onclick="display(1)"  class="num_len" id="id_1">1</button></td>
+                    <td><button onclick="display(2)"  class="num_len" id="id_2">2</button></td>
+                    <td><button onclick="display(3)"  class="num_len" id="id_3">3</button></td>
+                    <td><button onclick="fun_sub()" class="num_len" id="id_sub">-</button></td>
+                    <td rowspan="2"><button onclick="checking()"class="equ_button" id="id_equal">=</button></td>
+                </tr>
+
+                <tr>
+                    <td><button onclick="display(0)" class="num_len" id="id_0">0</button></td>
+                    <td><button onclick="fun_dot()" class="num_len" id="id_.">.</button></td>
+                    <td><button onclick="fun_per()" class="num_len" id="id_%">%</button></td>
+                    <td><button onclick="fun_plus()" class="num_len" id="id_+">+</button></td>
+                </tr>
+
+            </table>
+        </div><br>
+    </body>
+</html>
